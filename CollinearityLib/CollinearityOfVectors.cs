@@ -12,27 +12,27 @@
 
             // Two vectors are collinear if there is a number k such that b = k * a.
             // In other words: (x2, y2) = (k * x1, k * y1).
-
-            double k;
-
             // Find the non-zero element of the first vector and then calculate k.
-            if (x1 != 0)
-            {
-                k = Convert.ToDouble(x2) / Convert.ToDouble(x1);
-            }
-            else
-            {
-                k = Convert.ToDouble(y2) / Convert.ToDouble(y1);
-            }
+            double k = (x1 != 0)
+                       ? Convert.ToDouble(x2) / Convert.ToDouble(x1)
+                       : Convert.ToDouble(y2) / Convert.ToDouble(y1);
 
             // Checking the expression (x2, y2) = (k * x1, k * y1)
-            if ((k * x1 == x2) && (k * y1 == y2))
+            return ((k * x1 == x2) && (k * y1 == y2));
+        }
+
+        public static bool CollinearityInTwoDimensions(Vector2D vect1, Vector2D vect2) 
+        {
+            if ((vect1.X == 0 && vect1.Y == 0) || (vect2.X == 0 && vect2.Y == 0))
             {
-                // Since (x2, y2) equals to (k * x1, k * y1)
                 return true;
             }
 
-            return false;
+            double k = (vect1.X != 0) 
+                       ? Convert.ToDouble(vect2.X) / Convert.ToDouble(vect1.X)
+                       : Convert.ToDouble(vect2.Y) / Convert.ToDouble(vect1.Y);
+
+            return ((k * vect1.X == vect2.X) && (k * vect1.Y == vect2.Y));
         }
     }
 }
